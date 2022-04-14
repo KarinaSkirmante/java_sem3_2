@@ -1,0 +1,9 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<body>
+	<p>Informācjia par produktu--></p>
+	<p th:text="${package.getTitle()}" ></p>
+	<p th:text="${package.getPrice()}" ></p>
+	<p th:text="${package.getQuantity()}" ></p>
+	</body>
+</html>
