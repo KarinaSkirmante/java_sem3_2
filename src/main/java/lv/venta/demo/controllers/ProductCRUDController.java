@@ -78,4 +78,40 @@ public class ProductCRUDController {
 		return "redirect:/product/all/"+prod.getId();//izsauks /product/all/4
 	}
 	
+	//1.getMapping funkcija ar id
+	//1.1. atlasīt konkrēto produktu, kuru vēlas updeitot
+	//un to caur modeli ielik frontendā
+	@GetMapping("/update/{id}")
+	public String getProductUpdate(@PathVariable(name="id") int id,
+			Model model)
+	{
+		try {
+			Product prod = prodService.readById(id);
+			model.addAttribute("product", prod);
+			return "update-prod-page";
+		} catch (Exception e) {
+			model.addAttribute("errorMsg", e.getMessage());
+			return "error-page";//atvērs error-page.html lapu
+		}
+		
+	}
+	
+	//2.izveidot html lapu (th:action- mainisies)
+	
+	//3.postMapping - caur servisu veicam produkta redigešanu
+	//3.1.redirect uz ku citu url
+	//3.2. redirect uz kāu citu error url
+	@PostMapping("/update/{id}")
+	public String postProductUpdate(@PathVariable(name="id") int id, 
+			Product product)//redigetais produkts
+	{
+		try {
+			prodService.updateById(id, product);
+			return "redirect:/product/all/"+id;
+		} catch (Exception e) {
+			return "redirect:/product/all";
+		}
+	}
+	
+	
 }
