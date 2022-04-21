@@ -47,19 +47,50 @@ public class CRUDProductServiceImpl implements ICRUDProductService {
 
 	@Override
 	public Product readById(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		for(Product prod: allProducts)
+		{
+			if(prod.getId() == id)
+			{
+				return prod;
+			}
+		}
+		throw new Exception("Tāds id neeksistē");
+		
 	}
 
 	@Override
 	public void updateById(int id, Product temp) throws Exception {
-		// TODO Auto-generated method stub
+		for(Product prod: allProducts)
+		{
+			if(prod.getId() == id)
+			{
+				if(!prod.getTitle().equals(temp.getTitle()))
+					prod.setTitle(temp.getTitle());
+				if(prod.getQuantity() != temp.getQuantity())
+					prod.setQuantity(temp.getQuantity());
+				if(prod.getPrice()!=temp.getPrice())
+					prod.setPrice(temp.getPrice());
+			}
+		}
+		throw new Exception("Tāds id neeksistē");
 		
 	}
 
 	@Override
 	public void deleteById(int id) throws Exception {
-		// TODO Auto-generated method stub
+		boolean isFound = false;
+		for(Product prod: allProducts)
+		{
+			if(prod.getId() == id)
+			{
+				allProducts.remove(prod);
+				isFound = true;
+				
+			}
+		}
+		
+		if(!isFound)
+			throw new Exception("Tāds id neeksistē");
 		
 	}
 
