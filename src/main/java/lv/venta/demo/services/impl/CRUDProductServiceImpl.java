@@ -93,5 +93,8 @@ public class CRUDProductServiceImpl implements ICRUDProductService {
 			throw new Exception("Tāds id neeksistē");
 		
 	}
-
+//1. service interfeiss IFilterProductService
+//2. service kā klase un realīzet visas funkcijas	
+	
+	
 }
