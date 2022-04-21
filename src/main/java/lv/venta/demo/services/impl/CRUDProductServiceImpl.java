@@ -42,7 +42,7 @@ public class CRUDProductServiceImpl implements ICRUDProductService {
 	@Override
 	public ArrayList<Product> readAllProducts() {
 		// TODO Auto-generated method stub
-		return null;
+		return allProducts;
 	}
 
 	@Override
