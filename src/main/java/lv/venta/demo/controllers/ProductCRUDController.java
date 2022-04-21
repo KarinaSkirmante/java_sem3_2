@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -60,4 +61,21 @@ public class ProductCRUDController {
 			return "error-page";//atvērs error-page.html lapu
 		}
 	}
+	
+	//1.getMapping - lai parādītu html lapu
+	@GetMapping("/add") //localhost:8080/product/add
+	public String getProductAdd(Product product)//tukšs produkts tiek iedots uz html lapu
+	{
+		return "add-prod-page";//atveram add-prod-page.html lapu ar tukšu Product objektu
+	}
+	//2.uztiasītr ;lapu ar ievadwes laukiem
+	//3.nolasit datus no frontend bckendā - postMapping 
+	@PostMapping("/add")//localhost:8080/product/add
+	public String postProductAdd(Product product)//aizpildīts produkts tiek saņemts no html lapas
+	{
+		Product prod = prodService.createProduct(product);
+		//return "redirect:/product/all";
+		return "redirect:/product/all/"+prod.getId();//izsauks /product/all/4
+	}
+	
 }
