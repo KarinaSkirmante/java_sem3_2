@@ -112,6 +112,19 @@ public class ProductCRUDController {
 			return "redirect:/product/all";
 		}
 	}
-	
+	//delete kontrolieris - pēc id
+	@GetMapping("/delete/{id}")//localhost:8080/product/delete/1
+	public String getProductDelete(@PathVariable(name="id") int id,
+			Model model)
+	{
+		try {
+			prodService.deleteById(id);
+			model.addAttribute("package", prodService.readAllProducts());
+			return "all-prod-page";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error-page";//parādām error-page.html
+		}
+	}
 	
 }
