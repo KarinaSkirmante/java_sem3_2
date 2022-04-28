@@ -112,14 +112,19 @@ public class ProductCRUDController {
 	//3.2. redirect uz kāu citu error url
 	@PostMapping("/update/{id}")
 	public String postProductUpdate(@PathVariable(name="id") int id, 
-			Product product)//redigetais produkts
+			@Valid Product product, BindingResult result)//redigetais produkts
 	{
+		if(!result.hasErrors())
+		{
 		try {
 			prodService.updateById(id, product);
 			return "redirect:/product/all/"+id;
 		} catch (Exception e) {
 			return "redirect:/product/all";
 		}
+		}
+		else
+			return "update-prod-page";
 	}
 	//delete kontrolieris - pēc id
 	@GetMapping("/delete/{id}")//localhost:8080/product/delete/1
