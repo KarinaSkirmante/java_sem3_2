@@ -1,11 +1,30 @@
 package lv.venta.demo.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class Product {
 
 	//1.mainīgie
 	private int id;
+	
+	//@NotNull
+	//@NotEmpty
+	@Size(min = 3, max = 30)	
+	@Pattern(regexp="[A-Z]{1}[a-z]+", message="Must be first capital letter and others small")
 	private String title;
+	
+	
+	@Min(0)
+	@Max(10000)
 	private float price;
+	
+	@Min(0)
+	@Max(1000)
 	private int quantity;
 	
 	private static int counter=0;
