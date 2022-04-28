@@ -85,6 +85,7 @@ public class CRUDProductServiceImpl implements ICRUDProductService {
 			{
 				allProducts.remove(prod);
 				isFound = true;
+				break;
 				
 			}
 		}

@@ -126,5 +126,8 @@ public class ProductCRUDController {
 			return "error-page";//parādām error-page.html
 		}
 	}
+	//TODO - uztaisīt kontrolieru klasi ar kontrlolieru funkcijām
+	//filtracijas servisu nodrošīnāšanai
+	
 	
 }
