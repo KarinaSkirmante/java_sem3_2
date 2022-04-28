@@ -3,20 +3,17 @@ package lv.venta.demo.services.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lv.venta.demo.model.Product;
+import lv.venta.demo.repos.IProductRepo;
 import lv.venta.demo.services.ICRUDProductService;
 
 @Service
 public class CRUDProductServiceImpl implements ICRUDProductService {
-	
-	private ArrayList<Product> allProducts = new ArrayList<>(
-			Arrays.asList(
-					new Product("Maize", 2.13f, 3), 
-					new Product("Ūdens", 0.56f, 100), 
-					new Product("Telefons", 600.99f, 2) ));
-	
+	@Autowired
+	private IProductRepo prodRepo;
 	
 	@Override
 	public Product createProduct(Product temp) {
@@ -42,18 +39,16 @@ public class CRUDProductServiceImpl implements ICRUDProductService {
 	@Override
 	public ArrayList<Product> readAllProducts() {
 		// TODO Auto-generated method stub
-		return allProducts;
+		return (ArrayList<Product>) prodRepo.findAll();
 	}
 
 	@Override
 	public Product readById(int id) throws Exception {
-		for(Product prod: allProducts)
-		{
-			if(prod.getId() == id)
+		
+			if(prodRepo.existsById(id))
 			{
-				return prod;
+				return prodRepo.findById(id).get();
 			}
-		}
 		throw new Exception("Tāds id neeksistē");
 		
 	}
@@ -79,16 +74,12 @@ public class CRUDProductServiceImpl implements ICRUDProductService {
 	@Override
 	public void deleteById(int id) throws Exception {
 		boolean isFound = false;
-		for(Product prod: allProducts)
-		{
-			if(prod.getId() == id)
+		
+			if(prodRepo.existsById(id))
 			{
-				allProducts.remove(prod);
+				prodRepo.deleteById(id);
 				isFound = true;
-				break;
-				
 			}
-		}
 		
 		if(!isFound)
 			throw new Exception("Tāds id neeksistē");
