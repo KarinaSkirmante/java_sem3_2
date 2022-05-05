@@ -11,7 +11,10 @@ import lv.venta.demo.services.IFilterProductService;
 
 @Service
 public class FilterProductServiceImpl implements IFilterProductService {
-
+//1. pārtaisīt FilterProductServiceImpl uz repo
+//2. github/gitlab jaunu repoo uztaisīt
+//3. jaunu projektu
+//4. jaunas klases no Sem 4
 	@Autowired
 	private ICRUDProductService prodCRUDService;
 	
